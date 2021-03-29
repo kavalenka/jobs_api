@@ -1,0 +1,19 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+  - 'db/schema.rb'
+  - 'db/migrate/*.rb'
+  - '.*'
+  - 'config/**/*.rb'
+  - 'bin/*'
+  - 'config.ru'
+  - 'Gemfile'
+  - 'Rakefile'
+
+Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+  - 'Rakefile'
+  - '**/*.rake'
