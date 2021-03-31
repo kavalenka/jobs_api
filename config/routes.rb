@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   end
 
   resources :jobs, only: [:create]
+  resources :shifts, only: [:create]
 end

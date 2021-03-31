@@ -14,7 +14,6 @@ RSpec.describe JobsController do
       response_body = JSON.parse(response.body)
 
       expect(response_body['title']).to eq(title)
-      expect(response_body['rate_per_hour']).to eq(rate_per_hour)
       expect(response_body['languages']).to eq(languages.split(','))
     end
   end

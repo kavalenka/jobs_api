@@ -39,7 +39,7 @@ RSpec.describe 'Endpoint /users' do
         '{"error":"Unprocessable entity","error_messages":{"email":["is invalid"]}}'
       end
 
-      it 'returns unauthorized response' do
+      it 'returns 422 response' do
         expect(subject.status).to eq 422
         expect(subject.body).to eq response_body
       end

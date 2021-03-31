@@ -6,7 +6,7 @@ RSpec.describe Job, type: :model do
   subject { create(:job) }
 
   describe 'associations' do
-    xit { is_expected.to have_many(:shifts) }
+    it { is_expected.to have_many(:shifts) }
   end
 
   describe 'validations' do
