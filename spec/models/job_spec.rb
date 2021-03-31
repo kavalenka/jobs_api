@@ -7,6 +7,8 @@ RSpec.describe Job, type: :model do
 
   describe 'associations' do
     it { is_expected.to have_many(:shifts) }
+    it { is_expected.to have_many(:user_jobs) }
+    it { is_expected.to have_many(:users) }
   end
 
   describe 'validations' do
