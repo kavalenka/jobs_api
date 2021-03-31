@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  skip_before_action :authorize!
-
   def create
     user = User.new(user_params)
 

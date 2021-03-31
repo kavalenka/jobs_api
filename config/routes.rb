@@ -5,5 +5,5 @@ Rails.application.routes.draw do
     post :login, on: :collection
   end
 
-  get "/auto_login", to: "users#auto_login"
+  resources :jobs, only: [:create]
 end
