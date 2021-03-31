@@ -42,8 +42,4 @@ class ApplicationController < ActionController::API
   def render_not_found(model)
     render json: { message: "#{model} not found" }, status: :not_found
   end
-
-  def render_bad_request
-    render json: { message: 'Bad request' }, status: :bad_request
-  end
 end

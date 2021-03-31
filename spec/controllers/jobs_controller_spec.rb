@@ -18,7 +18,7 @@ RSpec.describe JobsController do
     end
   end
 
-  describe 'GET search' do
+  describe 'GET index' do
     before do
       create(:job, :with_shift, title: 'Programmer', languages: 'English, German')
       create(:job, :with_shift, title: 'Welder', languages: 'Spanish, German')
@@ -28,7 +28,7 @@ RSpec.describe JobsController do
     context 'with valid params' do
       context 'search by title' do
         it 'searches for a job' do
-          get :search, params: { field: 'title', value: 'og' }
+          get :index, params: { field: 'title', value: 'og' }
 
           response_body = JSON.parse(response.body)
 
@@ -38,7 +38,7 @@ RSpec.describe JobsController do
 
       context 'search by language' do
         it 'searches for a job' do
-          get :search, params: { field: 'language', value: 'ne' }
+          get :index, params: { field: 'languages', value: 'ne' }
 
           response_body = JSON.parse(response.body)
 
@@ -47,13 +47,13 @@ RSpec.describe JobsController do
       end
     end
 
-    context 'with invalid params' do
-      it 'returns bad request error' do
-        get :search, params: { field: 'titles' }
+    context 'with invalid search params' do
+      it 'returns all jobs with shifts' do
+        get :index, params: { field: 'titles' }
 
         response_body = JSON.parse(response.body)
 
-        expect(response_body).to eq({ 'message' => 'Bad request' })
+        expect(response_body.size).to eq(Job.count)
       end
     end
   end

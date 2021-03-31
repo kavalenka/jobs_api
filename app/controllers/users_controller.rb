@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
     render_not_found(Job) and return unless job
 
-    render json: { message: 'You can\'t apply for one job twice.' } and return if job.in? current_user.jobs
+    render json: { message: 'You can\'t apply for one job twice.' } and return if current_user.jobs.exists?(id: job.id)
 
     current_user.jobs << job
 

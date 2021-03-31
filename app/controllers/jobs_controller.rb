@@ -13,10 +13,12 @@ class JobsController < ApplicationController
     end
   end
 
-  def search
-    render_bad_request and return unless valid_search_params?
-
-    jobs = Job.where("#{search_params[:field]} ~* ?", search_params[:value]).with_shifts
+  def index
+    jobs = if valid_search_params?
+             Job.where("#{search_params[:field]} ~* ?", search_params[:value]).with_shifts
+           else
+             Job.with_shifts
+           end
 
     render json: jobs
   end
@@ -34,8 +36,7 @@ class JobsController < ApplicationController
   end
 
   def valid_search_params?
-    search_params.to_h.values.compact.size == 2 &&
-      search_params[:field].in?(SEARCH_FIELDS)
+    search_params[:field].in?(SEARCH_FIELDS) && search_params[:value].present?
   end
 
   def search_params

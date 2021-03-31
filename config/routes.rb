@@ -6,8 +6,6 @@ Rails.application.routes.draw do
     post :apply, on: :collection
   end
 
-  resources :jobs, only: [:create] do
-    get :search, on: :collection
-  end
+  resources :jobs, only: [:create, :index]
   resources :shifts, only: [:create]
 end

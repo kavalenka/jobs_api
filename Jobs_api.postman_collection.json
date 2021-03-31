@@ -158,15 +158,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3033/jobs/search?field=title&value=go",
+					"raw": "http://localhost:3033/jobs?field=title&value=go",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3033",
 					"path": [
-						"jobs",
-						"search"
+						"jobs"
 					],
 					"query": [
 						{
