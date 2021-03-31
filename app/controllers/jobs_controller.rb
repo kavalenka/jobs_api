@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class JobsController < ApplicationController
+  SEARCH_FIELDS = %w[title languages].freeze
+
   def create
     job = Job.new(initialize_params)
 
@@ -9,6 +11,14 @@ class JobsController < ApplicationController
     else
       render_unprocessable_entity(job)
     end
+  end
+
+  def search
+    render_bad_request and return unless valid_search_params?
+
+    jobs = Job.where("#{search_params[:field]} ~* ?", search_params[:value]).with_shifts
+
+    render json: jobs
   end
 
   private
@@ -21,5 +31,14 @@ class JobsController < ApplicationController
 
   def job_params
     params.permit(:title, :rate_per_hour, :languages).to_h
+  end
+
+  def valid_search_params?
+    search_params.to_h.values.compact.size == 2 &&
+      search_params[:field].in?(SEARCH_FIELDS)
+  end
+
+  def search_params
+    params.permit(:value, :field)
   end
 end

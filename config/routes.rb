@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     post :login, on: :collection
   end
 
-  resources :jobs, only: [:create]
+  resources :jobs, only: [:create] do
+    get :search, on: :collection
+  end
   resources :shifts, only: [:create]
 end
